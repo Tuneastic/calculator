@@ -1,1 +1,1 @@
-# calculator
+Create a calculator with js that can add, substract, multiply and divide
