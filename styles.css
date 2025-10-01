@@ -4,15 +4,40 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+button {
+    border-radius: 15px;
+}
+
+button:active {
+    transform: scale(1.1);
+}
+
 #calculator {
     background-color: gray;
-    width: 400px;
-    height:400px;
+    width: 500px;
+    height:500px;
     display:flex;
     flex-direction: column;   
 }
+
+#screen {
+    height:10%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top:30px;
+}
+
+#screen input {
+    width:70%;
+    height:50px;
+    border-radius:15px;
+}
+
 #numberPanel {
-    height:80%;
+    height:70%;
     width:100%;
     display:flex;
     flex-direction: row;
@@ -41,6 +66,12 @@ body {
 }
 
 #operatorPanel button {
+    height:60px;
+    width:60px;
+    margin:15px;
+}
+
+#clear {
     height:60px;
     width:60px;
     margin:15px;
