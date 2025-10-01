@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Write a function to operate a calculation
     function operate () {
-
+        
     }
 
     //Add event listeners to button 0-9
