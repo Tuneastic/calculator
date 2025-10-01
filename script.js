@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let btnAdd = document.getElementById('add');
     let btnSubstract = document.getElementById('substract');
     let btnMultiply = document.getElementById('multiply');
+    let btnDivide = document.getElementById('divide');
     let btnEqual = document.getElementById('equal');
     let input = document.getElementById('input');
       
