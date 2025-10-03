@@ -22,12 +22,12 @@ document.addEventListener("DOMContentLoaded", function() {
     //Initialize the array that will contain the numbers and operators
     let array = [];
 
-    //Make a function to update the screen with new information for readability
+    //Make a function to update the screen with new information
     function updateScreen (){
         input.value = array.join('');
     }
 
-    //Make the clear button turn the display to zero
+    //Make the clear button turn the display to zero and reinitialize the array
     btnClear.addEventListener('click', () =>{
         array = [];
         updateScreen();
