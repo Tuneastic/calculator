@@ -1,6 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 document.addEventListener("DOMContentLoaded", function() {  
 
-    //Find the buttons and assign them to a variable for readability
+    //Find the buttons and elements and assign them to variables
+    //Declare the array that will contain the calculation and initialize it
+    //Declare the array with the operators to check if the calculation array makes sense
     let btn7 = document.getElementById('7');
     let btn8 = document.getElementById('8');
     let btn9 = document.getElementById('9');
@@ -19,8 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let btnEqual = document.getElementById('equal');
     let input = document.getElementById('input');
     let btnDecimal = document.getElementById('decimal');
-      
-    //Initialize the array that will contain the numbers and operators
+    let operatorArray = ['-','+','*','/'];
     let array = [];
 
     //Make a function to update the screen with new information
@@ -33,11 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
         array = [];
         updateScreen();
     });
-
-    //Write a function to operate a calculation
-    function operate () {
-        
-    }
 
     //Add event listeners to button 0-9 and .
 
@@ -53,7 +64,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
     btnDecimal.addEventListener('click', () =>{
        if (array.includes('.')){
-        return
+        return;
+       }
+       else if (array.length <= 0){
+        array.push('0');
+        array.push('.');
+        updateScreen();
+        return;
+       }
+       else if ( operatorArray.includes(array[array.length-1])){
+        return;
        }
        else {
         array.push('.');
@@ -63,8 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Add eventlisteners for operator buttons
     //Add aan array consisting of operators to check if the calculation already has one
-
-    let operatorArray = ['-','+','*','/'];
 
     btnAdd.addEventListener('click', () =>{
        if (operatorArray.some(operator => array.includes(operator))){
@@ -113,3 +131,4 @@ document.addEventListener("DOMContentLoaded", function() {
        
 
 });
+*/
