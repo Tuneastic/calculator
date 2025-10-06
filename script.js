@@ -52,29 +52,58 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     btnDecimal.addEventListener('click', () =>{
+       if (array.includes('.')){
+        return
+       }
+       else {
         array.push('.');
         updateScreen();
+       }
     });
 
     //Add eventlisteners for operator buttons
+    //Add aan array consisting of operators to check if the calculation already has one
+
+    let operatorArray = ['-','+','*','/'];
+
     btnAdd.addEventListener('click', () =>{
+       if (operatorArray.some(operator => array.includes(operator))){
+        return;
+       }
+       else {
         array.push('+');
         updateScreen();
+       }
     });
 
     btnSubstract.addEventListener('click', () =>{
+        if (operatorArray.some(operator => array.includes(operator))){
+        return;
+       }
+       else {
         array.push('-');
         updateScreen();
+       }
     });
 
     btnMultiply.addEventListener('click', () =>{
+        if (operatorArray.some(operator => array.includes(operator))){
+        return;
+       }
+       else {
         array.push('*');
         updateScreen();
+       }
     });
 
     btnDivide.addEventListener('click', () =>{
+        if (operatorArray.some(operator => array.includes(operator))){
+        return;
+       }
+       else {
         array.push('/');
         updateScreen();
+       }
     });
 
     //Add eventlistener for equal sign button
