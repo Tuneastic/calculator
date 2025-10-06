@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let btnDivide = document.getElementById('divide');
     let btnEqual = document.getElementById('equal');
     let input = document.getElementById('input');
+    let btnDecimal = document.getElementById('decimal');
       
     //Initialize the array that will contain the numbers and operators
     let array = [];
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
     }
 
-    //Add event listeners to button 0-9
+    //Add event listeners to button 0-9 and .
 
     let buttons = [btn7, btn8, btn9, btn4, btn5, btn6, btn1, btn2, btn3, btn0];
     let values = [7, 8, 9, 4, 5, 6, 1, 2, 3, 0];
@@ -48,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function() {
             array.push(values[index]);
             updateScreen();
         });
+    });
+
+    btnDecimal.addEventListener('click', () =>{
+        array.push('.');
+        updateScreen();
     });
 
     //Add eventlisteners for operator buttons
