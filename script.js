@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    //Declaration of all variables, some being initialized
     let btn7 = document.getElementById('7');
     let btn8 = document.getElementById('8');
     let btn9 = document.getElementById('9');
@@ -24,10 +25,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let num1 = '';
     let num2 = '';
     let operator = '';
-    let result ;
-
-
+    let result;
+    
+    //This function evaluates the array, and extracts 2 numbers and an operator from it
     function extractCalc(array) {
+        num1 = '';
+        num2 = '';
+        operator = '';
+        
         for (let i = 0; i < array.length; i++) {
             if (array[i] === '+' || array[i] === '-' || array[i] === '*' || array[i] === '/') {
                 operator = array[i];
@@ -37,38 +42,43 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        return { num1: parseFloat(num1), operator, num2: parseFloat(num2) };
+        return [num1, operator, num2];
     };
 
+    //This function checks which operator is used in array, and performs the corresponding calculation
     function operate(operator){
         if (operator === '+'){
-            result = num1+num2;
+            result = parseFloat(num1) + parseFloat(num2);
         }
 
         else if (operator === '-'){
-            result = num1-num2;
+            result = parseFloat(num1) - parseFloat(num2);
         }
         else if (operator === '*'){
-            result = num1*num2;
+            result = parseFloat(num1) * parseFloat(num2);
         }
         else if (operator === '/'){
-            result = num1/num2;
+            result = parseFloat(num1) / parseFloat(num2);
         }
         else {
             result = 'Invalid operator';
         }
     };
 
+    //This button reinitializes the array, and resets the display
     btnClear.addEventListener('click', () =>{
         array = [];
         input.value = array.join('');
     });
 
+    //This function deletes the last addition to the array
     btnDelete.addEventListener('click', () =>{
         array.pop();
         input.value = array.join('');
     });
 
+    //This code adds eventlisteners to all the number buttons and pushes the corresponding number into the array
+    //Then displays the array in the input field
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
         array.push(values[index]);
@@ -76,29 +86,47 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    //This code adds an eventlistener to the add button, and pushes + to the array
+    //Then displays the array in the input field
     btnAdd.addEventListener('click', () =>{
         array.push('+');
         input.value = array.join('');
     });
 
+    //This code adds an eventlisstener to the substract button, and pushes - to the array
+    //Then displays the array in the input field
     btnSubstract.addEventListener('click', () =>{
-
+        array.push('-');
+        input.value = array.join('');
     });
 
+    //This code adds an eventlistener to the multiply button, and pushes * to the array
+    //Then displays the array in the input field
     btnMultiply.addEventListener('click', () =>{
-
+        array.push('*');
+        input.value = array.join('');
     });
 
+    //This code adds an eventlistener to the divide button, and pushes / to the array
+    //Then displays the array in the input field
     btnDivide.addEventListener('click', () =>{
-
+        array.push('/');
+        input.value = array.join('');
     });
 
+
+    //This code adds an eventlistener to the equal button, extracts and performs the calculation in array
+    //and displays the result in the input field
     btnEqual.addEventListener('click', () =>{
-        
+        extractCalc(array);
+        operate(operator);
+        input.value = result;
     });
 
+    //This code adds a decimal seperator to a number, then displays the array in the input field
     btnDecimal.addEventListener('click', () =>{
-
+        array.push('.');
+        input.value = array.join('');
     });
 
 });
