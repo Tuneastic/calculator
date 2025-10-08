@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    //Declaration of all variables, some being initialized
+   
     let btn7 = document.getElementById('7');
     let btn8 = document.getElementById('8');
     let btn9 = document.getElementById('9');
@@ -25,9 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let num1 = '';
     let num2 = '';
     let operator = '';
+    let calculation = [num1, operator, num2];
     let result;
     
-    //This function evaluates the array, and extracts 2 numbers and an operator from it
+    //Evaluates the array, and extracts an array with 2 numbers and an operator
     function extractCalc(array) {
         num1 = '';
         num2 = '';
@@ -42,10 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        return [num1, operator, num2];
+        return calculation;
     };
 
-    //This function checks which operator is used in the array, and performs the corresponding calculation
+    //Checks which operator is used in the array, performs the corresponding calculation
+    //and puts it into the variable 'result'
     function operate(operator){
         if (operator === '+'){
             result = parseFloat(num1) + parseFloat(num2);
@@ -65,20 +67,19 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     };
 
-    //This button reinitializes the array, and resets the display
+    //Clear screen
     btnClear.addEventListener('click', () =>{
         array = [];
         input.value = array.join('');
     });
 
-    //This function deletes the last addition to the array
+    //Delete last input
     btnDelete.addEventListener('click', () =>{
         array.pop();
         input.value = array.join('');
     });
 
-    //This code adds eventlisteners to all the number buttons and pushes the corresponding number into the array
-    //Then displays the array in the input field
+    //Numbers
     buttons.forEach((button, index) => {
         button.addEventListener('click', () => {
         array.push(values[index]);
@@ -86,44 +87,38 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    //This code adds an eventlistener to the add button, and pushes + to the array
-    //Then displays the array in the input field
+    //Add
     btnAdd.addEventListener('click', () =>{
         array.push('+');
         input.value = array.join('');
     });
 
-    //This code adds an eventlisstener to the substract button, and pushes - to the array
-    //Then displays the array in the input field
+    //Substract
     btnSubstract.addEventListener('click', () =>{
         array.push('-');
         input.value = array.join('');
     });
 
-    //This code adds an eventlistener to the multiply button, and pushes * to the array
-    //Then displays the array in the input field
+    //Multiply
     btnMultiply.addEventListener('click', () =>{
         array.push('*');
         input.value = array.join('');
     });
 
-    //This code adds an eventlistener to the divide button, and pushes / to the array
-    //Then displays the array in the input field
+    //Divide
     btnDivide.addEventListener('click', () =>{
         array.push('/');
         input.value = array.join('');
     });
 
-
-    //This code adds an eventlistener to the equal button, extracts and performs the calculation in array
-    //and displays the result in the input field
+    //Calculate
     btnEqual.addEventListener('click', () =>{
         extractCalc(array);
         operate(operator);
         input.value = result;
     });
 
-    //This code adds a decimal seperator to a number, then displays the array in the input field
+    //Decimal seperator
     btnDecimal.addEventListener('click', () =>{
         array.push('.');
         input.value = array.join('');
