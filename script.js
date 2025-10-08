@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let btn2 = document.getElementById('2');
     let btn3 = document.getElementById('3');
     let btn0 = document.getElementById('0');
-    let numberButtons =['btn7', 'btn8', 'btn9', 'btn4', 'btn5', 'btn6', 'btn1', 'btn2', 'btn3', 'btn0'];
+    let buttons = [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9];
+    let values = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     let btnClear = document.getElementById('clear');
     let btnDelete = document.getElementById('delete');
     let btnAdd = document.getElementById('add');
@@ -26,55 +27,18 @@ document.addEventListener("DOMContentLoaded", function() {
         input.value = array;
     });
 
-    btnBackspace.addEventListener('click', () =>{
+    btnDelete.addEventListener('click', () =>{
         array.pop();
         input.value = array.join('');
     });
-    
-    btn7.addEventListener('click', () =>{
-        array.push(7);
+
+    buttons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+        array.push(values[index]);
         input.value = array.join('');
+        });
     });
 
-    btn8.addEventListener('click', () =>{
-        array.push(8);
-        input.value = array.join('');
-    });
-
-    btn9.addEventListener('click', () =>{
-        array.push(9);
-        input.value = array.join('');
-    });
-
-    btn4.addEventListener('click', () =>{
-        array.push(4);
-        input.value = array.join('');
-    });
-
-    btn5.addEventListener('click', () =>{
-        array.push(5);
-        input.value = array.join('');
-    });
-
-    btn6.addEventListener('click', () =>{
-        array.push(6);
-        input.value = array.join('');
-    });
-
-    btn1.addEventListener('click', () =>{
-        array.push(1);
-        input.value = array.join('');
-    });
-
-    btn2.addEventListener('click', () =>{
-        array.push(2);
-        input.value = array.join('');
-    });
-
-    btn3.addEventListener('click', () =>{
-        array.push(3);
-        input.value = array.join('');
-    });
 });
 
 
