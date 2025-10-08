@@ -21,10 +21,47 @@ document.addEventListener("DOMContentLoaded", function() {
     let input = document.getElementById('input');
     let btnDecimal = document.getElementById('decimal');
     let array = [];
+    let num1 = '';
+    let num2 = '';
+    let operator = '';
+    let result ;
+
+
+    function extractCalc(array) {
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] === '+' || array[i] === '-' || array[i] === '*' || array[i] === '/') {
+                operator = array[i];
+                num1 = num1.length ? num1 : array.slice(0, i).join('');
+                num2 = array.slice(i + 1).join('');
+                break;
+            }
+        }
+
+        return { num1: parseFloat(num1), operator, num2: parseFloat(num2) };
+    };
+
+    function operate(operator){
+        if (operator === '+'){
+            result = num1+num2;
+        }
+
+        else if (operator === '-'){
+            result = num1-num2;
+        }
+        else if (operator === '*'){
+            result = num1*num2;
+        }
+        else if (operator === '/'){
+            result = num1/num2;
+        }
+        else {
+            result = 'Invalid operator';
+        }
+    };
 
     btnClear.addEventListener('click', () =>{
         array = [];
-        input.value = array;
+        input.value = array.join('');
     });
 
     btnDelete.addEventListener('click', () =>{
@@ -40,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     btnAdd.addEventListener('click', () =>{
-
+        array.push('+');
+        input.value = array.join('');
     });
 
     btnSubstract.addEventListener('click', () =>{
@@ -56,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     btnEqual.addEventListener('click', () =>{
-
+        
     });
 
     btnDecimal.addEventListener('click', () =>{
