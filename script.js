@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
         return [num1, operator, num2];
     };
 
-    //This function checks which operator is used in array, and performs the corresponding calculation
+    //This function checks which operator is used in the array, and performs the corresponding calculation
     function operate(operator){
         if (operator === '+'){
             result = parseFloat(num1) + parseFloat(num2);
