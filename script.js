@@ -111,17 +111,17 @@ document.addEventListener("DOMContentLoaded", function() {
         input.value = array.join('');
     });
 
-    //Calculate
-    btnEqual.addEventListener('click', () =>{
-        extractCalc(array);
-        operate(operator);
-        input.value = result;
-    });
-
     //Decimal seperator
     btnDecimal.addEventListener('click', () =>{
         array.push('.');
         input.value = array.join('');
+    });
+
+     //Calculate
+    btnEqual.addEventListener('click', () =>{
+        extractCalc(array);
+        operate(operator);
+        input.value = result;
     });
 
 });
