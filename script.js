@@ -39,6 +39,30 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
+    btnAdd.addEventListener('click', () =>{
+
+    });
+
+    btnSubstract.addEventListener('click', () =>{
+
+    });
+
+    btnMultiply.addEventListener('click', () =>{
+
+    });
+
+    btnDivide.addEventListener('click', () =>{
+
+    });
+
+    btnEqual.addEventListener('click', () =>{
+
+    });
+
+    btnDecimal.addEventListener('click', () =>{
+
+    });
+
 });
 
 
