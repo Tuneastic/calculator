@@ -15,8 +15,8 @@ button:active {
 
 #calculator {
     background-color: gray;
-    width: 500px;
-    height:500px;
+    width: 550px;
+    height:550px;
     display:flex;
     flex-direction: column;   
 }
@@ -73,8 +73,8 @@ button:active {
     font-weight: bold;
 }
 
-#clear {
+#clear, #delete {
     height:60px;
     width:60px;
-    margin:15px;
+    margin:5px;
 }
