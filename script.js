@@ -232,8 +232,8 @@
             extractCalc(array);
             if (num1 !== '' && operator !== '' && num2 !== ''){
                 operate(operator);
-
                 input.value = result;
+                array = [];
             }
             else {
                 input.value = array.join('');
