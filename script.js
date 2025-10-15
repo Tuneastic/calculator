@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let operator = '';
     let result;
     
-    //Evaluates the array, and extracts an array with numbers and operators
+    //Evaluates the array, and extracts an array with numbers and operators,
+    //so it's easier to perform the calculation 
     function extractCalc(array) {
         
         num1 = '';
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         for (let i = 0; i < array.length; i++) {
-            const char = array[i];
+            let char = array[i];
             if (char === '+' || char === '-' || char === '*' || char === '/') {
                 operator = char;
                 num1 = array.slice(0, i).join('');
@@ -69,7 +70,15 @@ document.addEventListener("DOMContentLoaded", function() {
             result = parseFloat(num1) * parseFloat(num2);
         }
         else if (operator === '/'){
-            result = parseFloat(num1) / parseFloat(num2);
+            if (num1 === '0') {
+                alert(`I can't divide by zero`);
+                array = [];
+                input.value = array.join('');
+                return;
+            }
+            else {
+                result = parseFloat(num1) / parseFloat(num2);
+            }
         }
         else {
             result = 'Invalid operator';
@@ -122,20 +131,71 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Substract
     btnSubstract.addEventListener('click', () =>{
-        array.push('-');
-        input.value = array.join('');
+        extractCalc(array);
+        if (num1 === '') {
+            array.push('0');
+            array.push('-');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator === '') {
+            array.push('-');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 === '') {
+            array.splice(-1,1,'-');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 !== ''){
+            operate(operator);
+            array.splice(0, array.length, result, '-');
+            input.value = `${result}-`;
+        }
     });
 
     //Multiply
     btnMultiply.addEventListener('click', () =>{
-        array.push('*');
-        input.value = array.join('');
+        extractCalc(array);
+        if (num1 === '') {
+            array.push('0');
+            array.push('*');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator === '') {
+            array.push('*');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 === '') {
+            array.splice(-1,1,'*');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 !== ''){
+            operate(operator);
+            array.splice(0, array.length, result, '*');
+            input.value = `${result}+`;
+        }
     });
 
     //Divide
     btnDivide.addEventListener('click', () =>{
-        array.push('/');
-        input.value = array.join('');
+        extractCalc(array);
+        if (num1 === '') {
+            array.push('0');
+            array.push('/');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator === '') {
+            array.push('/');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 === '') {
+            array.splice(-1,1,'/');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 !== ''){
+            operate(operator);
+            array.splice(0, array.length, result, '/');
+            input.value = `${result}/`;
+        }
     });
 
     //Decimal seperator
