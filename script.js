@@ -1,218 +1,239 @@
-document.addEventListener("DOMContentLoaded", function() {
-   
-    let btn7 = document.getElementById('7');
-    let btn8 = document.getElementById('8');
-    let btn9 = document.getElementById('9');
-    let btn4 = document.getElementById('4');
-    let btn5 = document.getElementById('5');
-    let btn6 = document.getElementById('6');
-    let btn1 = document.getElementById('1');
-    let btn2 = document.getElementById('2');
-    let btn3 = document.getElementById('3');
-    let btn0 = document.getElementById('0');
-    let buttons = [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0];
-    let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    let btnClear = document.getElementById('clear');
-    let btnDelete = document.getElementById('delete');
-    let btnAdd = document.getElementById('add');
-    let btnSubstract = document.getElementById('substract');
-    let btnMultiply = document.getElementById('multiply');
-    let btnDivide = document.getElementById('divide');
-    let btnEqual = document.getElementById('equal');
-    let input = document.getElementById('input');
-    let btnDecimal = document.getElementById('decimal');
-    let array = [];
-    let num1 = '';
-    let num2 = '';
-    let operator = '';
-    let result;
+    document.addEventListener("DOMContentLoaded", function() {
     
-    //Evaluates the array, and extracts an array with numbers and operators,
-    //so it's easier to perform the calculation 
-    function extractCalc(array) {
+        let btn7 = document.getElementById('7');
+        let btn8 = document.getElementById('8');
+        let btn9 = document.getElementById('9');
+        let btn4 = document.getElementById('4');
+        let btn5 = document.getElementById('5');
+        let btn6 = document.getElementById('6');
+        let btn1 = document.getElementById('1');
+        let btn2 = document.getElementById('2');
+        let btn3 = document.getElementById('3');
+        let btn0 = document.getElementById('0');
+        let buttons = [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0];
+        let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        let btnClear = document.getElementById('clear');
+        let btnDelete = document.getElementById('delete');
+        let btnAdd = document.getElementById('add');
+        let btnSubstract = document.getElementById('substract');
+        let btnMultiply = document.getElementById('multiply');
+        let btnDivide = document.getElementById('divide');
+        let btnEqual = document.getElementById('equal');
+        let input = document.getElementById('input');
+        let btnDecimal = document.getElementById('decimal');
+        let array = [];
+        let num1 = '';
+        let num2 = '';
+        let operator = '';
+        let result;
         
-        num1 = '';
-        num2 = '';
-        operator = '';
+        //Evaluates the array, and extracts an array with numbers and operators,
+        //so it's easier to perform the calculation 
+        function extractCalc(array) {
+            
+            num1 = '';
+            num2 = '';
+            operator = '';
 
-        if (array.length === 0){
-            return[num1, operator, num2];
-        }
-        
-        for (let i = 0; i < array.length; i++) {
-            let char = array[i];
-            if (char === '+' || char === '-' || char === '*' || char === '/') {
-                operator = char;
-                num1 = array.slice(0, i).join('');
-                num2 = array.slice(i + 1).join('');
-                break;
+            if (array.length === 0){
+                return[num1, operator, num2];
             }
+            
+            for (let i = 0; i < array.length; i++) {
+                let char = array[i];
+                if (char === '+' || char === '-' || char === '*' || char === '/') {
+                    operator = char;
+                    num1 = array.slice(0, i).join('');
+                    num2 = array.slice(i + 1).join('');
+                    break;
+                }
+            }
+
+            if (operator === '') {
+                num1 = array.join('');
+            }
+
+            return [num1, operator, num2];
         }
 
-        if (operator === '') {
-            num1 = array.join('');
-        }
 
-        return [num1, operator, num2];
-    }
-
-
-    //Checks which operator is used in the array, performs the corresponding calculation
-    //and puts it into the variable 'result'
-    function operate(operator){
-        if (operator === '+'){
-            result = parseFloat(num1) + parseFloat(num2);
-        }
-        else if (operator === '-'){
-            result = parseFloat(num1) - parseFloat(num2);
-        }
-        else if (operator === '*'){
-            result = parseFloat(num1) * parseFloat(num2);
-        }
-        else if (operator === '/'){
-            if (num2 === '0') {
-                alert(`I can't divide by zero`);
-                result = '0';
-                array = [];
-                input.value = array.join('');
-                return;
+        //Checks which operator is used in the array, performs the corresponding calculation
+        //and puts it into the variable 'result'
+        function operate(operator){
+            if (operator === '+'){
+                result = parseFloat(num1) + parseFloat(num2);
+            }
+            else if (operator === '-'){
+                result = parseFloat(num1) - parseFloat(num2);
+            }
+            else if (operator === '*'){
+                result = parseFloat(num1) * parseFloat(num2);
+            }
+            else if (operator === '/'){
+                if (num2 === '0') {
+                    alert(`I can't divide by zero`);
+                    result = '0';
+                    array = [];
+                    input.value = array.join('');
+                    return;
+                }
+                else {
+                    result = parseFloat(num1) / parseFloat(num2);
+                }
             }
             else {
-                result = parseFloat(num1) / parseFloat(num2);
+                result = 'Invalid operator';
             }
-        }
-        else {
-            result = 'Invalid operator';
-        }
-    };
+        };
 
-    //Clear screen
-    btnClear.addEventListener('click', () =>{
-        array = [];
-        input.value = array.join('');
-    });
-
-    //Delete last input
-    btnDelete.addEventListener('click', () =>{
-        array.pop();
-        input.value = array.join('');
-    });
-
-    //Numbers
-    buttons.forEach((button, index) => {
-        button.addEventListener('click', () => {
-        array.push(values[index]);
-        input.value = array.join('');
+        //Clear screen
+        btnClear.addEventListener('click', () =>{
+            array = [];
+            input.value = array.join('');
         });
-    });
 
-    //Add
-    btnAdd.addEventListener('click', () =>{
-        extractCalc(array);
-        if (num1 === '') {
-            array.push('0');
-            array.push('+');
+        //Delete last input
+        btnDelete.addEventListener('click', () =>{
+            array.pop();
             input.value = array.join('');
-        }
-        else if (num1 !== '' && operator === '') {
-            array.push('+');
+        });
+
+        //Numbers
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+            array.push(values[index]);
             input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 === '') {
-            array.splice(-1,1,'+');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 !== ''){
+            });
+        });
+
+        //Add
+        btnAdd.addEventListener('click', () =>{
+            extractCalc(array);
+            if (num1 === '') {
+                array.push('0');
+                array.push('+');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator === '') {
+                array.push('+');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 === '') {
+                array.splice(-1,1,'+');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 !== ''){
+                operate(operator);
+                array.splice(0, array.length, result, '+');
+                input.value = `${result}+`;
+            }
+            
+        });
+
+        //Substract
+        btnSubstract.addEventListener('click', () =>{
+            extractCalc(array);
+            if (num1 === '') {
+                array.push('0');
+                array.push('-');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator === '') {
+                array.push('-');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 === '') {
+                array.splice(-1,1,'-');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 !== ''){
+                operate(operator);
+                array.splice(0, array.length, result, '-');
+                input.value = `${result}-`;
+            }
+        });
+
+        //Multiply
+        btnMultiply.addEventListener('click', () =>{
+            extractCalc(array);
+            if (num1 === '') {
+                array.push('0');
+                array.push('*');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator === '') {
+                array.push('*');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 === '') {
+                array.splice(-1,1,'*');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 !== ''){
+                operate(operator);
+                array.splice(0, array.length, result, '*');
+                input.value = `${result}+`;
+            }
+        });
+
+        //Divide
+        btnDivide.addEventListener('click', () =>{
+            extractCalc(array);
+            if (num1 === '') {
+                array.push('0');
+                array.push('/');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator === '') {
+                array.push('/');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 === '') {
+                array.splice(-1,1,'/');
+                input.value = array.join('');
+            }
+            else if (num1 !== '' && operator !== '' && num2 !== ''){
+                operate(operator);
+                array.splice(0, array.length, result, '/');
+                input.value = `${result}/`;
+            }
+        });
+
+        //Decimal seperator
+        btnDecimal.addEventListener('click', () => {
+            extractCalc(array);
+            if (operator === '') {
+                    if (num1.includes('.')) return;
+
+                    if (num1 === '') {
+                        array.push('0');
+                        array.push('.');
+                    } else {
+                        array.push('.');
+                    }
+                } else {
+                    if (num2.includes('.')) return;
+
+                    if (num2 === '') {
+                        array.push('0');
+                        array.push('.');
+                    } else {
+                        array.push('.');
+                    }
+                }
+
+                input.value = array.join('');
+        });
+
+
+        //Calculate
+        btnEqual.addEventListener('click', () =>{
+            extractCalc(array);
             operate(operator);
-            array.splice(0, array.length, result, '+');
-            input.value = `${result}+`;
-        }
-        
-    });
+            input.value = result;
+        });
 
-    //Substract
-    btnSubstract.addEventListener('click', () =>{
-        extractCalc(array);
-        if (num1 === '') {
-            array.push('0');
-            array.push('-');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator === '') {
-            array.push('-');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 === '') {
-            array.splice(-1,1,'-');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 !== ''){
-            operate(operator);
-            array.splice(0, array.length, result, '-');
-            input.value = `${result}-`;
-        }
     });
-
-    //Multiply
-    btnMultiply.addEventListener('click', () =>{
-        extractCalc(array);
-        if (num1 === '') {
-            array.push('0');
-            array.push('*');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator === '') {
-            array.push('*');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 === '') {
-            array.splice(-1,1,'*');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 !== ''){
-            operate(operator);
-            array.splice(0, array.length, result, '*');
-            input.value = `${result}+`;
-        }
-    });
-
-    //Divide
-    btnDivide.addEventListener('click', () =>{
-        extractCalc(array);
-        if (num1 === '') {
-            array.push('0');
-            array.push('/');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator === '') {
-            array.push('/');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 === '') {
-            array.splice(-1,1,'/');
-            input.value = array.join('');
-        }
-        else if (num1 !== '' && operator !== '' && num2 !== ''){
-            operate(operator);
-            array.splice(0, array.length, result, '/');
-            input.value = `${result}/`;
-        }
-    });
-
-    //Decimal seperator
-    btnDecimal.addEventListener('click', () =>{
-        array.push('.');
-        input.value = array.join('');
-    });
-
-     //Calculate
-    btnEqual.addEventListener('click', () =>{
-        extractCalc(array);
-        operate(operator);
-        input.value = result;
-    });
-
-});
 
 
 
