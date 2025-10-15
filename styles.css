@@ -67,12 +67,30 @@ button:active {
     font-size: 25px;
 }
 
+#delete {
+    color:red;
+}
+
+#clear {
+    color:blue;
+}
+
+#input {
+    color:green;
+    font-size:20px;
+}
+
+#input::placeholder {
+    color:green;
+}
+
 #operatorPanel button {
     height:60px;
     width:60px;
     margin:15px;
     font-size: 25px;
     font-weight: bold;
+    border-radius:50%;
 }
 
 #clear, #delete {

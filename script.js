@@ -99,7 +99,7 @@
             input.value = array.join('');
         });
 
-        //Numbers
+        //Enter numbers
         buttons.forEach((button, index) => {
             button.addEventListener('click', () => {
             array.push(values[index]);
