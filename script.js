@@ -25,26 +25,36 @@ document.addEventListener("DOMContentLoaded", function() {
     let num1 = '';
     let num2 = '';
     let operator = '';
-    let calculation = [num1, operator, num2];
     let result;
     
-    //Evaluates the array, and extracts an array with 2 numbers and an operator
+    //Evaluates the array, and extracts an array with numbers and operators
     function extractCalc(array) {
+        
         num1 = '';
         num2 = '';
         operator = '';
+
+        if (array.length === 0){
+            return[num1, operator, num2];
+        }
         
         for (let i = 0; i < array.length; i++) {
-            if (array[i] === '+' || array[i] === '-' || array[i] === '*' || array[i] === '/') {
-                operator = array[i];
-                num1 = num1.length ? num1 : array.slice(0, i).join('');
+            const char = array[i];
+            if (char === '+' || char === '-' || char === '*' || char === '/') {
+                operator = char;
+                num1 = array.slice(0, i).join('');
                 num2 = array.slice(i + 1).join('');
                 break;
             }
         }
 
-        return calculation;
-    };
+        if (operator === '') {
+            num1 = array.join('');
+        }
+
+        return [num1, operator, num2];
+    }
+
 
     //Checks which operator is used in the array, performs the corresponding calculation
     //and puts it into the variable 'result'
@@ -52,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function() {
         if (operator === '+'){
             result = parseFloat(num1) + parseFloat(num2);
         }
-
         else if (operator === '-'){
             result = parseFloat(num1) - parseFloat(num2);
         }
@@ -89,8 +98,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //Add
     btnAdd.addEventListener('click', () =>{
-        array.push('+');
-        input.value = array.join('');
+        extractCalc(array);
+        if (num1 === '') {
+            array.push('0');
+            array.push('+');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator === '') {
+            array.push('+');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 === '') {
+            array.splice(-1,1,'+');
+            input.value = array.join('');
+        }
+        else if (num1 !== '' && operator !== '' && num2 !== ''){
+            operate(operator);
+            array.splice(0, array.length, result, '+');
+            input.value = `${result}+`;
+        }
+        
     });
 
     //Substract
