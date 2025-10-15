@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let btn2 = document.getElementById('2');
     let btn3 = document.getElementById('3');
     let btn0 = document.getElementById('0');
-    let buttons = [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9];
-    let values = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let buttons = [btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0];
+    let values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     let btnClear = document.getElementById('clear');
     let btnDelete = document.getElementById('delete');
     let btnAdd = document.getElementById('add');
@@ -70,8 +70,9 @@ document.addEventListener("DOMContentLoaded", function() {
             result = parseFloat(num1) * parseFloat(num2);
         }
         else if (operator === '/'){
-            if (num1 === '0') {
+            if (num2 === '0') {
                 alert(`I can't divide by zero`);
+                result = '0';
                 array = [];
                 input.value = array.join('');
                 return;
