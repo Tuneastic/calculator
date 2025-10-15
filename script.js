@@ -229,8 +229,14 @@
         //Calculate
         btnEqual.addEventListener('click', () =>{
             extractCalc(array);
-            operate(operator);
-            input.value = result;
+            if (num1 !== '' && operator !== '' && num2 !== ''){
+                operate(operator);
+
+                input.value = result;
+            }
+            else {
+                input.value = array.join('');
+            }
         });
 
     });
