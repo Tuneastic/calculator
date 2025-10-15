@@ -94,6 +94,7 @@
 
         //Delete last input
         btnDelete.addEventListener('click', () =>{
+            array = input.value.split('');
             array.pop();
             input.value = array.join('');
         });
@@ -172,7 +173,7 @@
             else if (num1 !== '' && operator !== '' && num2 !== ''){
                 operate(operator);
                 array.splice(0, array.length, result, '*');
-                input.value = `${result}+`;
+                input.value = `${result}*`;
             }
         });
 
